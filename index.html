@@ -1,0 +1,85 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>AI Location - Allocation</title>
+    <meta name="description" content="Genetic Algorithm for Location - Allocation">
+    <meta name="author" content="Konstantinos Triantos">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+    <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <h4 class="text-muted mt-2">Genetic Algorithm (AI)</h4>
+                <h5>For optimal location - allocation</h5>
+                <hr>
+
+                <button id="btnStart" class="btn btn-outline-primary btn-block">START</button>
+                <button id="btnStop" class="btn btn-outline-danger btn-block" style="display: none">STOP</button>
+
+                <h5 class="mt-5">Demand Points</h5>
+                <p>Click on map to generate each demand point or</p>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-demand-points btn-outline-secondary" id="btnGenerateRnd" type="button">Generate random</button>
+                    </div>
+                    <input type="number" id="inpGenerateRnd" class="form-control text-right" min=1 placeholder="number" value=50>
+                    <button class="btn btn-outline-secondary btn-demand-points ml-2" id="btnClear">Clear</button>
+                </div>
+                <small>If no demand points are generated, the program will automatically generate random demand points.</small>
+
+                <div class="form-group mt-5">                            
+                    <label for="inpFacilities"><h5>Number of facilities</h5></label>
+                    <input type="number" id="inpFacilities" class="form-control text-center" min=1 placeholder="number" value=3>
+                </div>
+                
+                <h5 class="mt-5">G.A. parameters</h5>
+
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Population</span>
+                    </div>
+                    <input type="number" id="inpPopulation" class="form-control text-right" min=10 placeholder="number" value=20>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Elite Children</span>
+                    </div>
+                    <input type="number" id="inpElite" class="form-control text-right" min=1 placeholder="number" value=2>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Fitness parameter</span>
+                    </div>
+                    <input type="number" id="inpFitnessParameter" class="form-control text-right" min=1 placeholder="number" value=2>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Mutation odds (%)</span>
+                    </div>
+                    <input type="number" id="inpMutation" class="form-control text-right" min=1 max=20 placeholder="number" value=5>
+                </div>
+            </div>
+            <div class="col-md-9 p-0">
+                <div id="map" style="height: 100vh; width: 100%; background: #f5f5f5;"></div>
+                <div class="generation-info" style="position: absolute; top: 0; right: 0; z-index: 2000; margin-right: 10px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./Generation.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
